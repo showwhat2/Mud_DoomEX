@@ -186,7 +186,9 @@ select,button{
 
   <!-- 內容 -->
   <div class="info-content"
-	 v-html="info">
+	 v-html="info"
+	 @mousedown="startInfoDrag"
+     @touchstart="startInfoTouch">
   </div>
   
   <!-- 標題列（拖曳區） -->
