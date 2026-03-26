@@ -1,0 +1,8 @@
+﻿{
+  "mapText": "\n艾弗隆\n\n　　　　　　妖　　　○－主　　　武　雞　農－○\n　　　　　　nu　　　∣　　　　　∣　en／　　∣\n　　　　　　○－○－○　酒－女－○－婦　　　蠻\n　　　　　　∣　　　∣　∣　　　∣　∣　　／\n　　○－樂－○　商　韓－○　　　○－販－○\n　　　／　　∣　　＼∣　∣　　　∣　∣\n　　馬　　　○－伊－？　封　○－懶　○\n　　　　　　　　∣　∣　　　∣\n　　　　　　　　○－○－○－河\n　　　　　　　　　　　　∣　∣　\n　　　　　　　　　　　　藥－兵－⊙－狼－○\n\n",
+  "markers": [
+    { "key":"城門","color":"gold","title":"城門","text":"通往外城。" },
+    { "key":"守衛","color":"lightgreen","title":"守衛","text":"裝備精良。\n會阻止可疑人物。" },
+    { "key":"寶箱","color":"deepskyblue","title":"寶箱","text":"裡面有道具。" }
+  ]
+}

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset=”utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+<title>Vue 地圖系統</title>
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+<style>
+body{
+  margin:0;
+  background:#111;
+  color:white;
+  font-family: "Noto Sans TC", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  overflow:hidden;
+}
+
+#app{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.topbar{
+  background:#222;
+  padding:10px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.topbar-wrapper {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 20;
+}
+
+select,button{
+  background:#333;
+  color:white;
+  border:1px solid #555;
+  padding:5px 10px;
+}
+
+.map-container{
+  flex:1;
+  position:relative;
+  overflow:hidden;
+  touch-action:none;
+}
+
+.map{
+  position:absolute;
+  white-space:pre;
+  transform-origin:0 0;
+  line-height:1.2em;
+}
+
+.marker{
+  cursor:pointer;
+}
+
+.info {
+  background: #222;
+  padding: 10px;
+  min-height: 70px;
+
+  white-space: pre-line;
+
+  /* 🔥 新增 */
+  transform-origin: left bottom;
+  max-height: 150px;   /* 可自己調整 */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.info-box{
+  position:fixed;
+  left:100px;
+  button:100px;
+
+  background:#222;
+  border:1px solid #888;
+  box-shadow:0 0 10px #000;
+
+  z-index:999;
+}
+
+.info-header{
+  background:#444;
+  padding:5px;
+  cursor:move;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.info-header button{
+  background:#222;
+  color:white;
+  border:1px solid #666;
+  cursor:pointer;
+}
+
+.info-content{
+  padding:10px;
+  overflow-y:auto;
+
+  white-space:pre-line;
+
+  /* 🔥 手機滑動優化 */
+  -webkit-overflow-scrolling: touch;
+}
+
+.info-content::-webkit-scrollbar{
+  width:24px;
+}
+
+.info-content::-webkit-scrollbar-thumb{
+  background:#666;
+}
+
+</style>
+</head>
+
+<body>
+<div id="app">
+
+<div class="topbar-wrapper" :style="menuStyle">
+  <div class="topbar">
+    <select v-model="selectedCategory" @change="onCategoryChange">
+      <option v-for="(maps,cat) in mapIndex" :key="cat">
+        {{cat}}
+      </option>
+    </select>
+
+    <select v-model="selectedMap" @change="loadMap">
+      <option v-for="m in mapIndex[selectedCategory]" :key="m">
+        {{m}}
+      </option>
+    </select>
+
+    <button @click="zoomIn">＋</button>
+    <button @click="zoomOut">－</button>
+  </div>
+</div>
+
+  <div class="map-container"
+       @mousedown="startDrag"
+       @mousemove="drag"
+       @mouseup="stopDrag"
+       @mouseleave="stopDrag"
+       @wheel.prevent="onWheel"
+       @touchstart="onTouchStart"
+       @touchmove="onTouchMove"
+       @touchend="stopDrag">
+
+    <div class="map"
+         :style="{
+           transform:`translate(${offsetX}px,${offsetY}px) scale(${zoom})`
+         }"
+         v-html="renderedMap">
+    </div>
+  </div>
+
+<div v-if="info"
+     class="info-box"
+     :style="infoBoxStyle"
+     @mousedown="startInfoDrag"
+     @touchstart="startInfoTouch">
+
+  <!-- 標題列（拖曳區） -->
+  <div class="info-header">
+    <button @click.stop="closeInfo">✕</button>
+    <button @click.stop="closeInfo">✕</button>
+  </div>
+
+  <!-- 內容 -->
+  <div class="info-content"
+	 v-html="info"
+     @touchstart.stop
+     @touchmove.stop>
+  </div>
+  
+  <!-- 標題列（拖曳區） -->
+  <div class="info-header">
+    <button @click.stop="closeInfo">✕</button>
+    <button @click.stop="closeInfo">✕</button>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+const {createApp}=Vue;
+
+createApp({
+data(){
+return{
+  mapIndex:{},
+  selectedCategory:"",
+  selectedMap:"",
+  mapText:"",
+  markers:[],
+  zoom:1,
+  offsetX:0,
+  offsetY:0,
+  dragging:false,
+  lastX:0,
+  lastY:0,
+  touchDist:null,
+  info:"",
+  infoX: 100,
+  infoY: 100,
+  infoDragging: false,
+  infoLastX: 0,
+  infoLastY: 0
+}
+},
+
+computed:{
+infoStyle(){
+    return {
+      fontSize: `${16 * this.zoom}px`,
+      maxHeight: `${150 * this.zoom}px`,
+      overflowY: "auto"
+    }
+},
+infoBoxStyle(){
+  return {
+    transform: `translate(${this.infoX}px, ${this.infoY}px) scale(${this.zoom})`,
+    transformOrigin: "top left"
+  }
+},
+renderedMap(){
+  let text=this.mapText;
+
+  this.markers.forEach(m=>{
+    const regex=new RegExp(m.key,"g");
+    text=text.replace(regex,
+      `<span class="marker" style="color:${m.color}" onclick="appShowInfo(decodeURIComponent('${encodeURIComponent(m.title)}'), decodeURIComponent('${encodeURIComponent(m.text)}'))">${m.key}</span>`
+    );
+  });
+
+  return text;
+},
+
+infoStyle() {
+      return {
+        transform: `scale(${this.zoom})`,
+        transformOrigin: "bottom right"
+      }
+ },
+	
+menuStyle() {
+	  return {
+		transform: `scale(${this.zoom})`,
+		transformOrigin: "top left"
+	  }
+
+	},
+},
+
+methods:{
+
+async loadIndex(){
+  const res=await fetch("./maps/index.json");
+  this.mapIndex=await res.json();
+
+  this.selectedCategory=Object.keys(this.mapIndex)[0];
+  this.selectedMap=this.mapIndex[this.selectedCategory][0];
+
+  this.loadMap();
+},
+
+async loadMap(){
+  const res=await fetch(`./maps/${this.selectedCategory}/${this.selectedMap}.json`);
+  const data=await res.json();
+
+  this.mapText=data.mapText;
+  this.markers=data.markers;
+
+  this.zoom=1;
+  this.offsetX=0;
+  this.offsetY=0;
+  this.info="";
+},
+
+onCategoryChange(){
+  this.selectedMap=this.mapIndex[this.selectedCategory][0];
+  this.loadMap();
+},
+
+zoomIn(){this.zoom*=1.1},
+zoomOut(){this.zoom/=1.1},
+
+startDrag(e){
+  this.dragging=true;
+  this.lastX=e.clientX-this.offsetX;
+  this.lastY=e.clientY-this.offsetY;
+},
+
+drag(e){
+  if(!this.dragging)return;
+  this.offsetX=e.clientX-this.lastX;
+  this.offsetY=e.clientY-this.lastY;
+},
+
+stopDrag(){this.dragging=false},
+
+onWheel(e){
+  this.zoom*=e.deltaY>0?0.9:1.1;
+},
+
+onTouchStart(e){
+  if(e.touches.length===1){
+    this.lastX=e.touches[0].clientX-this.offsetX;
+    this.lastY=e.touches[0].clientY-this.offsetY;
+  }
+  if(e.touches.length===2){
+    this.touchDist=this.getDist(e);
+  }
+},
+
+onTouchMove(e){
+  if(e.touches.length===1){
+    this.offsetX=e.touches[0].clientX-this.lastX;
+    this.offsetY=e.touches[0].clientY-this.lastY;
+  }
+  if(e.touches.length===2){
+    const newDist=this.getDist(e);
+    this.zoom*=newDist/this.touchDist;
+    this.touchDist=newDist;
+  }
+},
+
+getDist(e){
+  return Math.hypot(
+    e.touches[0].clientX-e.touches[1].clientX,
+    e.touches[0].clientY-e.touches[1].clientY
+  );
+},
+
+startInfoDrag(e){
+  this.infoDragging = true;
+  this.infoLastX = e.clientX - this.infoX;
+  this.infoLastY = e.clientY - this.infoY;
+
+  document.addEventListener("mousemove", this.onInfoDrag);
+  document.addEventListener("mouseup", this.stopInfoDrag);
+},
+
+onInfoDrag(e){
+  if(!this.infoDragging) return;
+
+  this.infoX = e.clientX - this.infoLastX;
+  this.infoY = e.clientY - this.infoLastY;
+},
+
+stopInfoDrag(){
+  this.infoDragging = false;
+  document.removeEventListener("mousemove", this.onInfoDrag);
+  document.removeEventListener("mouseup", this.stopInfoDrag);
+},
+
+/* 手機拖曳 */
+startInfoTouch(e){
+  const t = e.touches[0];
+  this.infoDragging = true;
+  this.infoLastX = t.clientX - this.infoX;
+  this.infoLastY = t.clientY - this.infoY;
+
+  document.addEventListener("touchmove", this.onInfoTouchMove);
+  document.addEventListener("touchend", this.stopInfoTouch);
+},
+
+onInfoTouchMove(e){
+  if(!this.infoDragging) return;
+
+  const t = e.touches[0];
+  this.infoX = t.clientX - this.infoLastX;
+  this.infoY = t.clientY - this.infoLastY;
+},
+
+stopInfoTouch(){
+  this.infoDragging = false;
+  document.removeEventListener("touchmove", this.onInfoTouchMove);
+  document.removeEventListener("touchend", this.stopInfoTouch);
+},
+
+
+formatText(text){
+  return text
+    .replace(/\[black\](.*?)\[\/black\]/g, '<span style="color:black">$1</span>')
+    .replace(/\[gray\](.*?)\[\/gray\]/g, '<span style="color:gray">$1</span>')
+    .replace(/\[aqua\](.*?)\[\/aqua\]/g, '<span style="color:aqua">$1</span>')
+	.replace(/\[green\](.*?)\[\/green\]/g, '<span style="color:green">$1</span>')
+	.replace(/\[olive\](.*?)\[\/olive\]/g, '<span style="color:olive">$1</span>')
+	.replace(/\[teal\](.*?)\[\/teal\]/g, '<span style="color:teal">$1</span>')
+	.replace(/\[blue\](.*?)\[\/blue\]/g, '<span style="color:blue">$1</span>')
+	.replace(/\[lime\](.*?)\[\/lime\]/g, '<span style="color:lime">$1</span>')
+	.replace(/\[purple\](.*?)\[\/purple\]/g, '<span style="color:purple">$1</span>')
+	.replace(/\[yellow\](.*?)\[\/yellow\]/g, '<span style="color:yellow">$1</span>')
+	.replace(/\[fuchsia\](.*?)\[\/fuchsia\]/g, '<span style="color:fuchsia">$1</span>')
+	.replace(/\[maroon\](.*?)\[\/maroon\]/g, '<span style="color:maroon">$1</span>')
+	.replace(/\[red\](.*?)\[\/red\]/g, '<span style="color:red">$1</span>')
+	.replace(/\[white\](.*?)\[\/white\]/g, '<span style="color:white">$1</span>')
+	.replace(/\[gold\](.*?)\[\/gold\]/g, '<span style="color:gold">$1</span>')
+	.replace(/\[Silver\](.*?)\[\/Silver\]/g, '<span style="color:Silver">$1</span>')
+    .replace(/\n/g, "<br>");
+},
+
+/* 關閉 */
+closeInfo(){
+  this.info = "";
+}
+
+},
+
+mounted(){
+  window.appShowInfo=(title,text)=>{
+    this.info=title+"\n\n"+this.formatText(text);
+  };
+  this.loadIndex();
+}
+
+}).mount("#app");
+</script>
+
+</body>
+</html>
