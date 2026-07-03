@@ -1,0 +1,8 @@
+﻿{
+  "mapText": "\n\n○　　　　　　　　　　　　夢　　　　境\n\nEditor:Isaac\n這些map是很早就完成的,所以會有一些錯或是沒發現到的地方\n,還請多多指教.\n\n　　　　有些是憑印像寫的,像是putwand這些啦,可能會有一點小錯誤,\n　　　　不過大部分都是對的,特別感謝larkandariadne,每次都是\n　　　　找ariadne陪我來.\n\n\n\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　○\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　　　　　　　樹──花　　　　　屁\n　　　　　　　　　　　　　　　　　　　／　　　│　　　　　│\n　　　　　　　　　　　　　　　　　　○　　　　○　　　　　○\n　　　　　　　　　　　　　　　　　／　　　　　│　　　　　│\n　　　　　　　　　　　　　　　　○　　　　　　○─○─○─瓦─○─迷\n　　　　　　　　　　　　　　　／　　　　　　　│　　　　　│\n　　　　　　　　　　　　　　起　　　　　　　　派　　　　　○　　　　　　　○\n　　　　　　　　　　　　　　　＼　　　　　　　│　　　　　│　　　　　　　│\n　　　　　　　　　　　　　　　　跳　　　　　　○　　　　　○　　　　　瓜─Ｗ─○\n　　　　　　　　　　　　　　　　　　　　　　　│　　　　　│　　　　　　　│\n　　　　　　　　　　　　　　　　魚　　　　　　○　　　　　○　　　　　　　○\n　　　　　　　　　　　　　　　　∥Ｕｐ　　　　｜\n　　　　　　　　　　　　　　　　○　　　　　　○\n　　　　　　　　　　　　　　　　∥Ｈｏｌｅ　　│\n　　　　　　　　　　　　　　　　Ｋ　　　　　　Ｋ\n　　\n\n\n\n\n　　　　　　　　　　　　　　　　　　　　　　向　　　　　　　　　○\n　　　　　　　　　　　　　　　　　　　　　　∥Ｎｄ　　　　　　／\n　　　　　　　　　　　　　　　　　　　　　　○　　　　　　　○\n　　　　　　　　　　　　　　　　　　　　　　｜　　　　　　／\n　　　　　　　　　　　　　　　　蝴　　　　　○　○─○─水\n　　　　　　　　　　　　　　　　│　　　　　│／Ｎｅｕ　　＼\n　　　　　　　　　　　　　　　　○　　Ｎｅｕ○　　　　　　　壁\n　　　　　　　　　　　　　　　　│　　　　／│\n　　　　　　　　　　　　○─○─杜─○─○　○　　　　　　　　　　○\n　　　　　　　　　　　　　　　　│　　　　　│　　　　　　　　　　│\n　　　　　　　　　　　　　　　　○　　　　　Ｊ　　　　　　　　○─家─○\n　　　　　　　　　　　　　　　　│　　　洞─火　　　　　　　　　　│\n　　　　　　　　　　　　　　　　瀑　　　　　　　　　　　　　　　　○\n　　\n　　\n　　\n　　\n",
+  "markers": [
+    { "key":"城門","color":"gold","title":"城門","text":"通往外城。" },
+    { "key":"守衛","color":"lightgreen","title":"守衛","text":"裝備精良。\n會阻止可疑人物。" },
+    { "key":"寶箱","color":"deepskyblue","title":"寶箱","text":"裡面有道具。" }
+  ]
+}

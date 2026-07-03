@@ -1,0 +1,8 @@
+﻿{
+  "mapText": "○\n\n\nEditor : Isaac\n這些map 是很早就完成的, 所以會有一些錯或是沒發現到的地方\n, 還請多多指教.\n　　　　　　　　　　　　　　　　○\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　　　○\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　○─○　○　　　　　Ｍ\n　　　　　　　　　　　　│　│　│　　　　　│\n　　　　　　　　○─○─○─○─○─○─○─○─老\n　　　　　　　　│　│　　　│　│　　　│　　　│\n　　　　　　　　○　○　　　比─○─藥　○　武─○\n　　　　　　　　│　　　　　　　│　　　　　　　│\n　　　　　　　　○　　　旅　　　○　　　馬　　　○\n　　　　　　　　│　　　│　　　│　　　│　　　│\n　　　　　　　　○─○─○─○─○─○─○─○─○\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　　　○\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　　　○\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　　　○\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　○─禁\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　○─○─農─菜\n　　　　　　　　　　　　　　│　　　│\n　　　　　　　　　　　　　　○　○─○\n　　　　　　　　　　　　　　│　│\n　　　　　　　　　　　　　　牛─○\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　　　警up○up坎\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　　　○　　　石ed○\n　　　　　　　　　　　　　　　　nu　　／　　　＼\n　　　　　　　　　　　　　　　　○─○　　　　　○en鬼\n　　　　　　　　　　　　　　　　nu　en　　　　／\n　　　　　　　　　　　　　　　　○　○　　　 千\n　　　　　　　　　　　　　　　　│　　＼\n　　　　　　　　　　　　　　　　Ｃ　　　巨\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　○─門─○\n　　　　　　　　　　　　　　│　│　│\n　　　　　　　　　　　　　　○─○─○\n　　　　　　　　　　　　　　　　│\n　　　　　　　　　　　　　　　　守\n\n\n\n\n\n\n\n",
+  "markers": [
+    { "key":"城門","color":"gold","title":"城門","text":"通往外城。" },
+    { "key":"守衛","color":"lightgreen","title":"守衛","text":"裝備精良。\n會阻止可疑人物。" },
+    { "key":"寶箱","color":"deepskyblue","title":"寶箱","text":"裡面有道具。" }
+  ]
+}
