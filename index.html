@@ -137,17 +137,33 @@ select,button{
 
 <div class="topbar-wrapper" :style="menuStyle">
   <div class="topbar">
+
+	<select v-model="selectedType" @change="onTypeChange">
+	  <option
+		v-for="(categories, type) in mapIndex"
+		:key="type"
+		:value="type">
+		{{ type }}
+	  </option>
+	</select>
+	
     <select v-model="selectedCategory" @change="onCategoryChange">
-      <option v-for="(maps,cat) in mapIndex" :key="cat">
-        {{cat}}
-      </option>
-    </select>
+	  <option
+		v-for="(maps,cat) in mapIndex[selectedType]"
+		:key="cat"
+		:value="cat">
+		{{cat}}
+	  </option>
+	</select>
 
     <select v-model="selectedMap" @change="loadMap">
-      <option v-for="m in mapIndex[selectedCategory]" :key="m">
-        {{m}}
-      </option>
-    </select>
+	  <option
+		v-for="m in mapIndex[selectedType][selectedCategory]"
+		:key="m"
+		:value="m">
+		{{m}}
+	  </option>
+	</select>
 
     <button @click="zoomIn">＋</button>
     <button @click="zoomOut">－</button>
@@ -208,6 +224,7 @@ createApp({
 data(){
 return{
   mapIndex:{},
+  selectedType:"",
   selectedCategory:"",
   selectedMap:"",
   mapText:"",
@@ -274,17 +291,22 @@ menuStyle() {
 methods:{
 
 async loadIndex(){
-  const res=await fetch("./maps/index.json");
+  const res=await fetch("./data/index.json");
   this.mapIndex=await res.json();
 
-  this.selectedCategory=Object.keys(this.mapIndex)[0];
-  this.selectedMap=this.mapIndex[this.selectedCategory][0];
+  this.selectedType = Object.keys(this.mapIndex)[0];
+
+  this.selectedCategory =
+    Object.keys(this.mapIndex[this.selectedType])[0];
+
+  this.selectedMap =
+    this.mapIndex[this.selectedType][this.selectedCategory][0];
 
   this.loadMap();
 },
 
 async loadMap(){
-  const res=await fetch(`./maps/${this.selectedCategory}/${this.selectedMap}.json`);
+  const res=await fetch(`./data/${this.selectedType}/${this.selectedCategory}/${this.selectedMap}.json`);
   const data=await res.json();
 
   this.mapText=data.mapText;
@@ -296,9 +318,27 @@ async loadMap(){
   this.info="";
 },
 
+onTypeChange(){
+
+    this.selectedCategory =
+        Object.keys(
+            this.mapIndex[this.selectedType]
+        )[0];
+
+    this.selectedMap =
+        this.mapIndex[this.selectedType][this.selectedCategory][0];
+
+    this.loadMap();
+
+},
+
 onCategoryChange(){
-  this.selectedMap=this.mapIndex[this.selectedCategory][0];
-  this.loadMap();
+
+    this.selectedMap =
+        this.mapIndex[this.selectedType][this.selectedCategory][0];
+
+    this.loadMap();
+
 },
 
 zoomIn(){this.zoom*=1.1},
