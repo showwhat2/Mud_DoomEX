@@ -1,8 +1,0 @@
-﻿{
-  "mapText": "\n\n七星四樓\n　　　　　月\n\n",
-  "markers": [
-    { "key":"城門","color":"gold","title":"城門","text":"通往外城。" },
-    { "key":"守衛","color":"lightgreen","title":"守衛","text":"裝備精良。\n會阻止可疑人物。" },
-    { "key":"寶箱","color":"deepskyblue","title":"寶箱","text":"裡面有道具。" }
-  ]
-}

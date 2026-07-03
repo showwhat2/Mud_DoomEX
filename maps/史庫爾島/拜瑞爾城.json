@@ -1,8 +1,0 @@
-﻿{
-  "mapText": "Editor:Madman\n\n史庫爾島\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　碼－○　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　∣　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　○－○－○－－－麻　　　　　　　　　　　\n　　　　　　　　　　　　　　　＋　　　　　　　∣　　　　　　　　　　　\n　　　　　　管　花　　　　旅－○　　　　　　　○　　　　　　　　　　　\n　　　　　　∣　∣　　　　　　∣　　　　　　　∣　　　　　　　　　　　\n　　　　　　○－○　　　　　　○　孩　老　　　貓－○－獸　　　　　　　　　　　\n　　　　　　∣　∣　　　　　／　＼∣　＋　　　∣　　　∣　　　　　　　\n　　　　　　○－池　　池－○　○　○－○　　　○　　　○　　　　　　　\n　　　　　　　　　　　∣　　＼∣／　　∣　　　∣　　　∣　　　　　　　\n　　　　　　　　　　　銀　　　○　　　藥　○－鼠　　　瀑　　　　　　　\n　　　　　　　　　　　　　　　∣　　　　　∣　　　　　　　　　　　\n　　　　　　　　　　　　　商－○　　　衛－○　　　　　　　　　　　\n　　　　　　　　　　　　　　　∣　　　　　∣　　　　　　　　　　　\n　　　　　　　　　　　　　傳－○－師　　　○－衛　　　　　　　　　\n　　　　　　　　　　　　　　　∣　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　○－○　樵　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　∣　　　∣　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　○　○　○　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　∣＼∣／∣　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　貓　席　樵　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n",
-  "markers": [
-    { "key":"城門","color":"gold","title":"城門","text":"通往外城。" },
-    { "key":"守衛","color":"lightgreen","title":"守衛","text":"裝備精良。\n會阻止可疑人物。" },
-    { "key":"寶箱","color":"deepskyblue","title":"寶箱","text":"裡面有道具。" }
-  ]
-}

@@ -1,8 +1,0 @@
-﻿{
-  "mapText": "\n索丹城內\n\n　　　　　　　　　　洞\n　　　　　　　　　　∣　　\n　　　　雕－○－B\n－○－商　\n　　　　　　　　∣\n　　　　　　　　○　　　武\n　　　　∣　　　∣　　　∣\n　　　　○－索－守－○－C2－亭－堂\n　　　／　　　　∣　　　∣\n　　水－○－C1－隊－C2　藥\n　　∣　　　　　∣\n港－○－－－○－○－○－○－老－B2\n　　∣　　　　　∣　∣　en\n　　酒　　　　　傳　餐　塔\n　　　　　　　　∣\n　　　　　　　　蛙　\n　　　　　　　　∣\n　　　　　　守－守\n　　　　　　　　∣\n　　　　　　　　王－○－廚\n\n\n\nC1 查理\nC2 老查\n\nB1 北門\nB2 東門\n\n\n\n　　　　∣ \n　　○－○－\n　／∣　∣　\nB1　∣　\nB2－○\n\n",
-  "markers": [
-    { "key":"城門","color":"gold","title":"城門","text":"通往外城。" },
-    { "key":"守衛","color":"lightgreen","title":"守衛","text":"裝備精良。\n會阻止可疑人物。" },
-    { "key":"寶箱","color":"deepskyblue","title":"寶箱","text":"裡面有道具。" }
-  ]
-}

@@ -1,8 +1,0 @@
-﻿{
-  "mapText": "\n\n【地圖】靛青石田\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　\n　　　　　　　　　　　　　　　　　　　　　　　　 \n　　　　　　　　　　　　　　　　　　　　　　　　　□？□\n　　　　　　　　　　　　　　　　　　　　　　　　　？\n　　　　　　　　　　　　　□－□－□　　　□　　　□\n　　　　　　　　　　　　　∣　∣　∣　　／　＼　／\n　　　　　　　　　　　　　壁－□－□－□　　　□\n　　　　　　　　　　　　／∣　　　　　　＼\n　　　　　　　　　　　維　□　　　雷　　　伊\n　　　　　　　　　　　∣　　＼　／\n　　　　　　　　　　　□　　　□\n　　　　　　　　　　　　　　　　＼\n　　　　　　　　　　　　　　　葛　□\n　　　　　　　　　　　　　　　　＼∣\n　　　　　　　　　　　　　　　　　□→□\n　　　　　　　　　　　　　　　　　　Ｅｕ↘Ｓｅｕ\n　　　　　　　　　　　　　　　　　　　　　□→□\n　　　　　　　　　　　　　　　　　　　　　　Ｅｕ↘Ｓｅｕ\n　　　　　　　　　　　　　　　　　　　　　　　　　□\n　　　　　　　　　　　　　　　　　　　　　　Ｗｕ／\n　　　　　　　　　　　　　　　　　　　　　□←□\n　　　　　　　　　　　　　　　　　　　Ｎｕ↑\n　　　　　　　　　　　　　　　　　　　　　□\n　　　　　　　　　　　　　　　　　　　　　　＼\n　　　　　　　　　　　　　　　　　　　　　□→□\n　　　　　　　　　　　　　　　　Ｅｕ　　／　Ｅｕ\n　　　　　　　　　　　　　　　□→□→□\n　　　　　　　　　　　　　　／　＼　Ｅｕ\n　　　衛－□－□－□－□－□　　　□\n　　／\n　林\n　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\n",
-  "markers": [
-    { "key":"城門","color":"gold","title":"城門","text":"通往外城。" },
-    { "key":"守衛","color":"lightgreen","title":"守衛","text":"裝備精良。\n會阻止可疑人物。" },
-    { "key":"寶箱","color":"deepskyblue","title":"寶箱","text":"裡面有道具。" }
-  ]
-}
